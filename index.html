@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>NASA API Project</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <meta name="description" content="Asteroid tracking and the like." />
+        <meta name="keywords" content="space,asteroids,nasa">
+        <meta name="author" content="Niall Slater">
+        <meta property="og:image" content="images/author_pic.jpg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        
+        <meta HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE" />
+		
+		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    </head>
+    
+    <body>
+        
+        <h1>Asteroid tracker</h1>
+        <p>Displaying info about near-Earth asteroids. Sizes are not to scale, but distances are.</p>
+        
+        <canvas width="800" height="500" class="trackerCanvas" id="canvas">
+        </canvas>
+        
+        <!--
+			SCRIPTS
+		-->
+        
+        <script src="js/tracker.js?1001"></script>
+    </body>
+</html>

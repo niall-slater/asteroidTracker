@@ -1,0 +1,15 @@
+body {
+	font-family: Montserray, sans-serif;
+	background-color: aliceblue;
+	background-color: #fff;
+	width: 90%;
+	padding: 2em;
+	margin: auto;
+	text-align: center;
+}
+
+.trackerCanvas {
+	background-color: #000;
+	width: 70%;
+	margin: auto;
+}
