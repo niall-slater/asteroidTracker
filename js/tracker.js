@@ -58,10 +58,10 @@ function drawMap() {
     
 	earthX = canvasWidth/2 - earthRadius;
 	earthY = canvasHeight/2 - earthRadius;
-	drawObject(earthX, earthY, earthRadius, 'blue');
+	drawObject(earthX, earthY, earthRadius, '#0045ff');
 	
 	//Draw the sun off to one side to help compare distance (but not size)
-	drawObject(earthX + convertAUToPixels(1), earthY, earthRadius * 4, 'rgba(255, 245, 0, 0.79)');
+	drawObject(earthX + convertAUToPixels(1), earthY, earthRadius * 4, 'rgb(255, 196, 0)');
 	
 	drawAsteroids();
 }
@@ -105,33 +105,47 @@ function drawAsteroids() {
 		
 		//Label asteroids with their names
 		var name = asteroid.name;
+		var diameter = asteroid.estimated_diameter.kilometers.estimated_diameter_max;
+		var hazardous = asteroid.is_potentially_hazardous_asteroid;
+		if (hazardous) {
+			hazardous = "Potentially hazardous";
+		} else {
+			hazardous = "Not hazardous";
+		}
+		var miss = asteroid.close_approach_data[0].miss_distance.lunar;
 		
-		ctx.font="14px Verdana";
+		ctx.font = "10px Arial";
 		
 		var gradient = ctx.createLinearGradient(0,0,canvas.width,0);
 		gradient.addColorStop("0","#3cc43c");
 		gradient.addColorStop("1","#cbffc7");
 		
-		var textOffsetX = 40;
-		var textOffsetY = 24;
+		var textOffsetX = 64;
+		var textOffsetY = 64;
 		// Fill with gradient
 		ctx.fillStyle = gradient;
+
+		//Canvas doesn't have multi-line rendering?? GOTTA DO EVERYTHING MYSELF I GUESS		
+		var lineHeight = 16;
 		ctx.fillText(name, asteroidX - textOffsetX, asteroidY - textOffsetY);
-		
+		ctx.fillText(Math.round(diameter*1000) + "m wide", asteroidX - textOffsetX, asteroidY - textOffsetY + lineHeight);
+		ctx.fillText(hazardous, asteroidX - textOffsetX, asteroidY - textOffsetY + lineHeight * 2);
+		ctx.fillText("Miss by " + Math.round(miss) + " moons", asteroidX - textOffsetX, asteroidY - textOffsetY + lineHeight * 3);
 		
 		ctx.beginPath();
 		ctx.strokeStyle = "rgba(10, 255, 0, 0.57)"
-		ctx.setLineDash([4,2]);
+		ctx.setLineDash([4, 2]);
 		ctx.lineWidth = 2;
-		ctx.moveTo(asteroidX - 2, asteroidY - 4);
-		ctx.lineTo(asteroidX - 10, asteroidY - textOffsetY + 4);
+		ctx.moveTo(asteroidX - 4, asteroidY - 1);
+		ctx.lineTo(asteroidX - 32, asteroidY - 12);
 		ctx.stroke();
 		
 		ctx.setLineDash([0]);
 		
-		//Draw asteroid last, so it's on top of the lines.
-		drawObject(asteroidX, asteroidY, asteroid.estimated_diameter.kilometers.estimated_diameter_max*5, 'rgba(181, 122, 53, 1)');
+		var asteroidScaleMultiplier = 5;
 		
+		//Draw asteroid last, so it's on top of the lines.
+		drawObject(asteroidX, asteroidY, diameter * asteroidScaleMultiplier, 'rgba(181, 122, 53, 1)');
 	}
 }
 
