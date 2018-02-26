@@ -15,7 +15,7 @@ var earthRadius = convertKmToPixels(6371);	//6371 is the earth's radius in kilom
 var earthX;
 var earthY;
 
-var sunRadius = earthRadius * 109/12;	//Sun's pretty big - best not display it to scale.
+var sunRadius = earthRadius * 109/12;	//Turns out the Sun's pretty big. Never mind.
 var pixelsPerAU = 400;
 
 var canvas;
